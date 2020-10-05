@@ -6,11 +6,7 @@ RUN apk add --update nodejs npm
 
 RUN apk add --update npm
 
-RUN apk update
-
-RUN apk upgrade
-
-RUN apk add --no-cache bash git
+RUN apk add --no-cache git
 
 RUN export CHROME_BIN="/workspaces/ng-docker-alpine/node_modules/puppeteer/.local-chromium/linux-800071/chrome-linux"
 
