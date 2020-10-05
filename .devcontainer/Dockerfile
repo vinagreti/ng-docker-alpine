@@ -1,9 +1,18 @@
-ARG VARIANT="12"
+FROM node:12.18.4-alpine3.12
 
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
+WORKDIR /workspaces/ng-docker-alpine
 
-RUN echo "PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\[\033[01;34m\]\W\[\033[00m\]\$ '" > /home/node/.bashrc
+RUN apk add --update nodejs npm
 
-RUN npm i
+RUN apk add --update npm
+
+RUN apk add --update git
 
 RUN export CHROME_BIN="/workspaces/ng-docker-alpine/node_modules/puppeteer/.local-chromium/linux-800071/chrome-linux"
+
+RUN echo "PS1='\[\033[01;32m\]\u@\[\033[01;34m\]\W\[\033[00m\]$ '" >> ~/.profile
+
+RUN source ~/.profile
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh
